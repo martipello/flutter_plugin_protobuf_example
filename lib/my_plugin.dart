@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/services.dart';
 import 'package:my_plugin/generated/models.pb.dart';
 import './extensions/extensions.dart';
@@ -44,6 +46,16 @@ class MyPlugin {
     } catch (e) {
       //TODO create a method here to handle the serialization error
     }
+  }
+
+ Future<bool> sendExampleDataToAndroid(ExampleData data) async {
+   return await _channel.invokeMethod(
+       'sendExampleDataToAndroid', data.writeToBuffer());
+ }
+
+  Future<ExampleData> sendExampleDataToAndroidForConversion(ExampleData data) async {
+    final Uint8List rawData = await _channel.invokeMethod('sendExampleDataToAndroidForConversion', data.writeToBuffer());
+    return ExampleData.fromBuffer(rawData);
   }
 
 }
