@@ -1,0 +1,21 @@
+
+syntax = "proto3";
+
+import "timestamp.proto";
+
+option java_package = "com.sealstudios.my_plugin";
+
+enum ExampleEnum {
+  SUCCESS = 0;
+  FAILED = 1;
+}
+
+message ExampleData {
+  string displayName = 1;
+  ExampleEnum enum = 2;
+  google.protobuf.Timestamp issueDate = 3;
+}
+
+message ExampleDataList {
+  repeated ExampleData virtualKeys = 1;
+}
